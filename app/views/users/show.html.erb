@@ -8,8 +8,8 @@
 <div id='invited_to'>
     <h2>Parties invited to</h2>
     <% @user.viewing_parties.each do | party | %>
-        <h2> <%= party.movie_title %></h2>
-        <p>Movie image: <%= "party.image" %>  </p>
+        <h2> <%=  party.movie_title %></h2>
+        <p>Movie image: <%= party.image %>  </p>
         <p>Date: <%= party.start_date %>  </p>
         <p>Start time: <%= party.start_time %>  </p>
         <p>Host: <%= party.host_id %>  </p>
@@ -24,7 +24,7 @@
     <h2>Parties hosting<h2>
         <% @user.parties_hosted.each do |party| %>
         <h2> <%= party.movie_title %></h2>
-        <p>Movie image: <%= "party.image" %>  </p>
+        <p>Movie image: <%= party.image %>  </p>
         <p>Date: <%= party.start_date %>  </p>
         <p>Start time: <%= party.start_time %>  </p>
         <p>Host: <%= party.host_id %>  </p>
