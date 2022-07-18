@@ -26,5 +26,4 @@ RSpec.describe User: :LoginForm do
     expect(current_path).to eq(login_path)
     expect(page).to have_content('Credentials invalid')
   end
-
 end
