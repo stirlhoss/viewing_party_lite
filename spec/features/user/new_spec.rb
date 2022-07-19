@@ -22,8 +22,7 @@ RSpec.describe User: :New do
 
       user = User.last
 
-
-      expect(current_path).to eq(user_path(user.id))
+      expect(current_path).to eq(dashboard_path)
       expect(page).to have_content("Welcome #{user.name}")
     end
   end

@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
   end
 
   def create
@@ -16,7 +15,7 @@ class UsersController < ApplicationController
     # user = User.find_by(email: params[:email])
     if user.save
       session[:user_id] = user.id
-      redirect_to dashboard_path(user)
+      redirect_to dashboard_path
       flash[:notice] = "Welcome #{user.name}"
     else
       flash[:error] = user.errors.full_messages

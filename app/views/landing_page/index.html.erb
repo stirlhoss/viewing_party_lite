@@ -4,5 +4,5 @@
 <%= button_to 'Login', '/login', method: :get  %>
 
 <% @users.each do |user| %>
-    <p><%= link_to "#{user.name}'s Dashboard", user_path(user.id) %></p>
+    <p><%= user.email.to_s  %></p>
 <% end %>

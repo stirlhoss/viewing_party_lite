@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/login', to: 'sessions#destroy'
 
-  get '/users/:user_id', to: 'users#show', as: 'dashboard'
-  get '/discover', to: 'users#discover'
+  get '/dashboard', to: 'users#show', as: 'dashboard'
+  get '/discover', to: 'users#discover', as: 'discover'
   resources :users, only: %i[create show new] do
     resources :movies, only: %i[index show] do
       resources :parties, only: %i[create new]

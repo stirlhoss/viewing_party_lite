@@ -5,7 +5,12 @@ RSpec.describe 'user discover page', :vcr do
   it 'shows top movies button' do
     user1 = User.create!(email: "user1@example.com", name: "Jeff Casimir", password: 'test123', password_confirmation: 'test123')
 
-    visit "/users/#{user1.id}/discover"
+    visit '/login'
+    fill_in 'Email', with: 'user1@example.com'
+    fill_in 'Password', with: 'test123'
+    click_on 'Login'
+
+    visit discover_path
 
     click_button 'Top Movies'
 
@@ -18,7 +23,14 @@ RSpec.describe 'user discover page', :vcr do
 
   it 'has search button' do
     user1 = User.create!(email: "user1@example.com", name: "Jeff Casimir", password: 'test123', password_confirmation: 'test123')
-    visit "/users/#{user1.id}/discover"
+
+    visit '/login'
+    fill_in 'Email', with: 'user1@example.com'
+    fill_in 'Password', with: 'test123'
+    click_on 'Login'
+
+    visit discover_path
+
     fill_in('Search', with: 'shrek')
     click_button 'Search'
 
