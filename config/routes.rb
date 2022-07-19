@@ -3,16 +3,19 @@ Rails.application.routes.draw do
   root to: 'landing_page#index'
 
   get '/register', to: 'users#new', as: 'register'
-  get '/login', to: 'users#login_form', as: 'login'
-  post '/login', to: 'users#login_user'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create'
+  delete '/login', to: 'sessions#destroy'
 
-  resources :users, only: [:create, :show] do
-    # resources :discover, only: index
-    resources :movies, only: [:index, :show]
+  get '/users/:user_id', to: 'users#show', as: 'dashboard'
+  get '/discover', to: 'users#discover'
+  resources :users, only: %i[create show new] do
+    resources :movies, only: %i[index show] do
+      resources :parties, only: %i[create new]
+    end
   end
 
 
-  get '/users/:id/discover', to: 'users#discover'
-  get '/users/:user_id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new'
-  # get '/users/:user_id/movies', to: 'movies#index'
+  # get '/discover', to: 'users#discover'
+  # get '/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new'
 end

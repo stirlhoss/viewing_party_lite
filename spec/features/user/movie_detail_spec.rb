@@ -28,8 +28,6 @@ RSpec.describe 'movie details page', :vcr do
 
     click_link 'Create Viewing Party'
 
-    save_and_open_page
-
     expect(current_path).to eq("/users/#{user1.id}/movies/278/viewing-party/new")
 
     expect(page).to have_content("The Shawshank Redemption")

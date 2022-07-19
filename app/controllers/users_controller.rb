@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   def discover
-    @user = User.find(params[:id])
+    @user = User.find(session[:user_id])
   end
 
   def new
@@ -12,9 +12,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
+    user = User.new(user_params)
+    # user = User.find_by(email: params[:email])
     if user.save
-      redirect_to user_path(user.id)
+      session[:user_id] = user.id
+      redirect_to dashboard_path(user)
       flash[:notice] = "Welcome #{user.name}"
     else
       flash[:error] = user.errors.full_messages
@@ -37,6 +39,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.permit(:name, :email, :password, :password_confirmation)
   end
 end
