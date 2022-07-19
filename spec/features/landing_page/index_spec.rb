@@ -40,4 +40,22 @@ RSpec.describe LandingPage: :Index do
     expect(page).to have_content('Jimmyb@gmail.com')
     expect(page).to have_content('johnnybgud@gmail.com')
   end
+
+  it 'has a button that allows you to log out' do
+    user1 = User.create!(name: 'Jim', email: 'Jimmyb@gmail.com', password: 'test123', password_confirmation: 'test123')
+
+    visit '/login'
+    fill_in 'Email', with: 'Jimmyb@gmail.com'
+    fill_in 'Password', with: 'test123'
+    click_on 'Login'
+
+    visit '/'
+
+    expect(page).to have_button('Log out')
+
+    click_button 'Log out'
+
+    expect(current_path).to eq('/')
+    expect(page).to have_button('Login')
+  end
 end
